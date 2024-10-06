@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login via MyID</title>
+  <style>
+    .myid-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .myid-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="myid-button" onclick="loginViaMyID()">Login via MyID</button>
+
+  <script>
+    function loginViaMyID() {
+      // Prepare the MyID authorization URL
+      const clientId = 'YOUR_CLIENT_ID'; // Replace with your client ID
+      const redirectUri = encodeURIComponent('YOUR_REDIRECT_URI'); // Replace with your redirect URI
+      const scope = encodeURIComponent('address,contacts,doc_data,common_data'); // Adjust scopes based on your needs
+      const responseType = 'code';
+      const method = 'strong'; // Use 'simple' or 'strong' based on your use case
+      const state = encodeURIComponent('random_string'); // Use a random string for CSRF protection
+
+      // Construct the MyID authorization URL
+      const authUrl = `https://domain/api/v1/oauth2/authorization?client_id=${clientId}&response_type=${responseType}&redirect_uri=${redirectUri}&scope=${scope}&method=${method}&state=${state}`;
+
+      // Redirect the user to the MyID login page
+      window.location.href = authUrl;
+    }
+  </script>
+
+</body>
+</html>
